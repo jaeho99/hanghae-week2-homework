@@ -24,7 +24,7 @@ public class JwtTokenProvider {
     private String secretKey = "spartahomeowrk2";
 
     // 토큰 유효시간 30분
-    private long tokenValidTime = 30 * 60 * 1000L;
+    private long tokenValidTime = 300000 * 60 * 1000L;
 
     private final UserDetailsService userDetailsService;
 
@@ -61,7 +61,7 @@ public class JwtTokenProvider {
 
     // Request의 Header에서 token 값을 가져옵니다. "X-AUTH-TOKEN" : "TOKEN값'
     public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("X-AUTH-TOKEN");
+        return request.getHeader("Authorization");
     }
 
     // 토큰의 유효성 + 만료일자 확인
