@@ -3,11 +3,18 @@ hanghae homework week2 / login post like
 
 프로젝트 링크(진행 상황: lv.2)
 
-현재 프로젝트 상태
+상태 : 프론트와 백앤드 연결 후 기능 테스트 진행중
 
+진행 : 프로젝트 추가 해야할 사항
+* 예외처리
+- 전체적인 예외처리
+- 에러에 따른 status 전송
 
+* 게시물 삭제시
+- 파일 삭제
 
-프론트와 백앤드 연결 후 기능 테스트
+이후 작업
+* test 프로그램 작성
 
 
 필수과제
@@ -56,12 +63,30 @@ RESTful은 REST를 REST답게 쓰기 위한 방법으로, 누군가가 공식적
 
 왜 Restful하게 짜야하나요?
 
+RESTful한 URL
+RESTful : https://www.hompage.com/dog/kind/bodercollie/weight/11
+Non-RESTful : https://www.hompage.com/dog?kind=bodercollie&weight=11
+
+
+
 Restful의 대안은?
+GraphQL
+- Graph Query Language로 facebook에서 개발한 쿼리 언어
+- API를 더욱 빠르고 유연하며 개발자 친화적으로 만들기 위해 설계됨
+- 통합 개발 환경 내에 배포될 수도 있음
+- REST를 대체할 수 있는 GraphQL은 개발자가 단일 API호출로 다양한 데이터 소스에서 데이터를
+  끌어오는 요청을 구성할 수 있도록 지원
 
 Restful하게 짜기 위해 무엇을 고려했나요?
 
-Spring
+GET, POST, PUT, DELETE
+
+
+
+Spring 과제
+
 Entity 설계를 위해 무엇을 하였나요?
+
 연관관계에 근거하여 설명해주세요.
 
 
@@ -71,8 +96,7 @@ N + 1 문제와 해결법
 
 연관 관계에서 발생하는 이슈로 연관 관계가 설정된 엔티티를 조회할 
 경우에 조회된 데이터 갯수(n) 만큼 연관관계의 조회 쿼리가 
-추가로 발생하여 데이터를 읽어오게 된다.
-이를 N + 1 문제라고 한다.
+추가로 발생하여 데이터를 읽어오게 된다. 이를 N + 1 문제라고 한다.
 
 Fetch join
 사실 원하는 코드는 select * from Owner left join cat on cat.owner_id = owner 일 것이다.
