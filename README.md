@@ -17,6 +17,12 @@ hanghae homework week2 / login post like
 * test 프로그램 작성
 
 
+
+
+
+
+
+
 필수과제
 
 전체 공통
@@ -86,9 +92,9 @@ GET, POST, PUT, DELETE
 Spring 과제
 
 Entity 설계를 위해 무엇을 하였나요?
-
 연관관계에 근거하여 설명해주세요.
 
+연관 관계 설정을 생각 해보았지만 22222222233
 
 설명 해야할 내용(lv.2)  --프로젝트 진행중--
 
