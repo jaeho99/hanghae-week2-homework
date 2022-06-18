@@ -1,8 +1,42 @@
+#spring:
+#  h2:
+#    console:
+#      enabled: 'true'
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#  jpa:
+#    show-sql: 'true'
+#  servlet:
+#    multipart:
+#      max-request-size: 20MB
+#      max-file-size: 20MB
 spring:
-  h2:
-    console:
-      enabled: 'true'
   datasource:
-    url: jdbc:h2:mem:testdb
+    username: studspringho
+    url: jdbc:mysql://springboot-db.cycpkysqqjqj.ap-northeast-2.rds.amazonaws.com:3306/myselectshop
+    password: gksqjsgoqhfRk!
   jpa:
-    show-sql: 'true'
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-request-size: 20MB
+      max-file-size: 20MB
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIAXXHJ5EOFS7NB7NOI
+      secretKey: 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
+    s3:
+      bucket: mtboardimages
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
