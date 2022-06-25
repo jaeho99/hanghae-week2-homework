@@ -5,6 +5,8 @@ import com.sparta.postlike.domain.Users;
 import com.sparta.postlike.domain.UsersRepository;
 import com.sparta.postlike.springsecurityjwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +33,16 @@ public class LoginRestController {
         return "";
     }
     @PostMapping("/api/login")
-    public String login(@RequestBody Map<String, String> user){
+    public ResponseEntity login(@RequestBody Map<String, String> user){
         Users member = usersRepository.findByEmail(user.get("email"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 E-MAIL 입니다."));
         if(!passwordEncoder.matches(user.get("password"), member.getPassword())){
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
-        return jwtTokenProvider.createToken(member.getEmail(), member.getNickname(), member.getId(), member.getRoles());
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("authorization", jwtTokenProvider.createToken(member.getEmail(), member.getNickname(), member.getId(), member.getRoles()));
+
+        return ResponseEntity.ok().headers(headers).body("토큰 갔습니다");
     }
 
     @GetMapping("/api/logout")

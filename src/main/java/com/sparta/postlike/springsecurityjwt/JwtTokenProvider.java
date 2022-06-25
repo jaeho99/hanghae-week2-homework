@@ -41,7 +41,7 @@ public class JwtTokenProvider {
         claims.put("nickname", nickname);
         claims.put("userid", id);
         Date now = new Date();
-        return Jwts.builder()
+        return "BEARER "+Jwts.builder()
                 .setClaims(claims) // 정보 저장
                 .setIssuedAt(now) // 토큰 발행 시간 정보
                 .setExpiration(new Date(now.getTime() + tokenValidTime)) // set Expire Time

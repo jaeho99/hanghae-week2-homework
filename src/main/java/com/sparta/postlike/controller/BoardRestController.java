@@ -2,9 +2,12 @@ package com.sparta.postlike.controller;
 
 import com.sparta.postlike.awsfile.S3Uploader;
 import com.sparta.postlike.domain.*;
+import com.sparta.postlike.exception.RestApiException;
 import com.sparta.postlike.service.BoardService;
 import com.sparta.postlike.springsecurityjwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,7 +60,6 @@ public class BoardRestController {
                               @ModelAttribute BoardRequestDto requestDto,
                               @AuthenticationPrincipal Users userDetails) throws IOException {
 //        if(!userDetails.getNickname().equals(boardRepository.findById()))
-        s3Uploader.upload(requestDto.getImg(), userDetails.getNickname());
         boardService.update(id, new BoardRequestDto(requestDto.getImg(), requestDto.getContent(), requestDto.getLayoutType()), userDetails);
         return "업데이트";
     }
@@ -76,7 +78,12 @@ public class BoardRestController {
         );
         return "성공";
     }
-
-
+    @ExceptionHandler({IllegalArgumentException.class})
+    public ResponseEntity handelException(IllegalArgumentException ex){
+        RestApiException restApiException = new RestApiException();
+        restApiException.setHttpStatus(HttpStatus.BAD_REQUEST);
+        restApiException.setErrorMessage((ex.getMessage()));
+        return new ResponseEntity(restApiException, HttpStatus.BAD_REQUEST);
+    }
 
 }
